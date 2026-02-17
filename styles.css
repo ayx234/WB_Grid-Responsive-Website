@@ -1,0 +1,315 @@
+/** @format */
+/* Responsive - Mobile First design */
+
+/* ----- General styels ----- */
+
+:root {
+	--yellow: #ffc600;
+	--yellow-trasnparent: #ffc600cc;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+body {
+	font-size: clamp(1rem, 1rem + 0.5dvw, 1.5rem);
+}
+
+button {
+	background: var(--yellow);
+	border: 0;
+	padding: 0.625rem 1.25rem; /*10px 20px*/
+}
+
+img {
+	max-width: 100%;
+}
+
+/* ----- Blocks / Components  -----*/
+
+.wrapper {
+	margin-inline: auto;
+	padding: 0.75rem;
+	max-width: 1200px;
+	display: grid;
+	gap: 1rem;
+}
+
+/* --- Menu / Nave --- */
+
+.menu {
+	order: -1;
+	display: grid;
+	gap: 0.75rem;
+}
+
+@media (min-width: 900px) {
+	.menu {
+		order: 0;
+	}
+}
+
+.menu button {
+	width: 100%;
+	font-size: inherit;
+	font-weight: bold;
+}
+
+@media (min-width: 900px) {
+	.menu button {
+		display: none;
+	}
+}
+
+/* [aria-expanded] is the menu button - testing selector */
+[aria-expanded],
+[aria-expanded] ~ ul,
+[aria-expanded] ~ ul li {
+	transition-property: height, max-height, transform, color;
+	transition-duration: 0.75s;
+}
+
+[aria-expanded="true"] {
+	background-color: black;
+	color: var(--yellow);
+}
+
+.menu button[aria-expanded="false"] .close {
+	display: none;
+}
+
+.menu button[aria-expanded="true"] .open {
+	display: none;
+}
+
+[aria-expanded] ~ ul {
+	list-style: none;
+	padding-inline-start: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	gap: 0.75rem;
+	max-height: 0;
+	perspective: 800px;
+	overflow: hidden;
+}
+
+[aria-expanded="true"] ~ ul {
+	max-height: 31.25rem;
+}
+
+@media (min-width: 900px) {
+	.menu ul {
+		max-height: 12.5rem;
+	}
+}
+
+[aria-expanded] ~ ul li {
+	max-height: 12.5rem;
+}
+
+[aria-expanded="false"] ~ ul li {
+	max-height: 0;
+	transform: rotateX(90deg);
+}
+
+.menu ul li {
+	background-color: var(--yellow);
+	text-align: center;
+	padding-block: 0.25rem;
+}
+
+@media (min-width: 900px) {
+	/* .menu ul li { */
+	/* testing if [aria-expanded] selector works even if
+	it has display none. it works */
+	[aria-expanded] ~ ul li {
+		transform: rotateX(0);
+		max-height: 12.5rem;
+	}
+}
+
+.menu ul li a {
+	text-decoration: none;
+	color: black;
+	text-transform: uppercase;
+}
+
+/* Top / Hero */
+
+.top {
+	display: grid;
+	gap: 0.5rem;
+	grid-template-areas:
+		"hero"
+		"cta1"
+		"cta2";
+}
+
+@media (min-width: 450px) {
+	.top {
+		grid-template-areas:
+			"hero hero"
+			"cta1 cta2";
+	}
+}
+
+@media (min-width: 700px) {
+	.top {
+		grid-template-areas:
+			"hero cta1"
+			"hero cta2";
+	}
+}
+
+.hero {
+	background: url(./images/taco.jpg) rgba(0, 0, 0, 0.2);
+	background-blend-mode: overlay;
+	background-position-x: center;
+	background-position-y: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 60dvw;
+	max-height: 31.25rem;
+	display: grid;
+	justify-items: start;
+	align-content: start;
+	grid-area: hero;
+}
+
+.hero > * {
+	background-color: var(--yellow-trasnparent);
+	padding: 0.25rem 0.5rem;
+	margin-inline-start: 3%;
+}
+
+.hero h1,
+.hero p {
+	--dynamicSize: 1dvw;
+}
+
+.hero h1 {
+	margin-block-start: 10%;
+	margin-block-end: 1rem;
+	font-size: clamp(2rem, 2rem + var(--dynamicSize), 3.1rem);
+}
+
+.hero p {
+	font-size: clamp(1rem, 1rem + var(--dynamicSize), 2.3rem);
+}
+
+.cta {
+	background-color: var(--yellow);
+	display: grid;
+	justify-items: center;
+	align-content: center;
+	min-height: 9.375rem; /* 150px */
+}
+
+.cta .price {
+	font-size: 3rem;
+	font-weight: bold;
+}
+
+.cta1 {
+	grid-area: cta1;
+}
+
+.cta2 {
+	grid-area: cta2;
+}
+
+/* --- Features section */
+
+.features {
+	display: grid;
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /*240px*/
+}
+
+.feature {
+	border: 0.1875rem solid lightgray; /*3px*/
+	border-radius: 0.125rem; /*2px*/
+	padding: 2rem;
+	display: grid;
+	gap: 0.75rem;
+	justify-items: center;
+	text-align: center;
+}
+
+.icon {
+	font-size: 4rem;
+}
+
+/* --- About --- */
+
+.about {
+	display: grid;
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+}
+
+.about > * {
+	margin-inline: auto;
+}
+
+@media (min-width: 633px) {
+	.about {
+		justify-content: start;
+	}
+
+	.about > * {
+		margin-inline: 0;
+	}
+}
+
+.about__details {
+	display: grid;
+	gap: 0.75rem;
+	justify-items: start;
+	align-content: center;
+}
+/* --- Gallery section */
+
+.gallery {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+}
+
+.gallery h2 {
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	gap: 1rem;
+	align-items: center;
+	--fade-direction: to left;
+}
+
+.gallery h2::before,
+.gallery h2::after {
+	content: "";
+	display: block;
+	height: 10px;
+	background-image: linear-gradient(
+		var(--fade-direction),
+		var(--yellow),
+		transparent
+	);
+}
+
+.gallery h2::after {
+	--fade-direction: to right;
+}
+
+.gallery img {
+	background-image: linear-gradient(135deg, #ffc60055, #00000055);
+	aspect-ratio: 1;
+	font-size: 3rem;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+}
