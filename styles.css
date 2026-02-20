@@ -17,10 +17,13 @@
 
 body {
 	font-size: clamp(1rem, 1rem + 0.5dvw, 1.5rem);
+	color: black;
 }
 
 button {
 	background: var(--yellow);
+	font-size: inherit;
+	color: inherit;
 	border: 0;
 	padding: 0.625rem 1.25rem; /*10px 20px*/
 }
@@ -55,7 +58,6 @@ img {
 
 .menu button {
 	width: 100%;
-	font-size: inherit;
 	font-weight: bold;
 }
 
